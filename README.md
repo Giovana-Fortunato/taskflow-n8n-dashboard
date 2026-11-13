@@ -57,7 +57,7 @@ flowchart LR
 
 ## Estrutura do repositório
 
-
+```text
 taskflow/
 ├── dashboard/
 │   ├── index.html
