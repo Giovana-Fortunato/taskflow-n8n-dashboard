@@ -1,0 +1,211 @@
+{
+  "name": "01 - Cadastro de tarefas",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Cadastro de Tarefas",
+        "formDescription": "Cadastre seus trabalhos e atividades acadêmicas",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Tarefa",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Disciplina",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Descrição",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "Data de entrega",
+              "fieldType": "date",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Prioridade",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Baixa"
+                  },
+                  {
+                    "option": "Média"
+                  },
+                  {
+                    "option": "Alta"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Status",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Pendente"
+                  },
+                  {
+                    "option": "Em andamento"
+                  },
+                  {
+                    "option": "Concluida"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "dc31f522-98f4-4213-9afd-7cb6548d4820",
+      "name": "On form submission",
+      "webhookId": "93cd9f7b-7344-4263-b92c-a08bf696de80"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_ID_DA_PLANILHA",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Tarefas"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Tarefa": "={{ $json[\"Tarefa\"] }}",
+            "Disciplina": "={{ $json[\"Disciplina\"] }}",
+            "Descrição": "={{ $json[\"Descrição\"] }}",
+            "Data de Entrega": "={{ $json['Data de entrega'] }}",
+            "Prioridade": "={{ $json[\"Prioridade\"] }}",
+            "Status": "={{ $json[\"Status\"] }}",
+            "ID": "={{ $execution.id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tarefa",
+              "displayName": "Tarefa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Disciplina",
+              "displayName": "Disciplina",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Descrição",
+              "displayName": "Descrição",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Data de Entrega",
+              "displayName": "Data de Entrega",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Prioridade",
+              "displayName": "Prioridade",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "b68954b1-da9a-4ca6-b975-b9c1b2890393",
+      "name": "Append row in sheet"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3fbc35a5-5c23-47f1-9d1d-5e58a45f6953",
+  "nodeGroups": [],
+  "id": "8kAc3mfTDAsUmzvN",
+  "tags": []
+}

@@ -1,0 +1,15 @@
+# Segredos e credenciais
+.env
+*.env
+credentials*.json
+client_secret*.json
+
+# Dados locais do n8n (caso use bind mount)
+n8n_data/
+
+# Sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

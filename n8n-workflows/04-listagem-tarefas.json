@@ -1,0 +1,94 @@
+{
+  "name": "04 - Listagem de Tarefas",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_ID_DA_PLANILHA",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Tarefas"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d56aa1e7-a1a8-41cc-a10a-8647875f72c1",
+      "name": "Get row(s) in sheet"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $input.all().map(item => item.json) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "c408a813-3258-462f-878b-765fbddb3a48",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "path": "taskflow/tarefas",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1367d57e-ed0c-4acc-b4cb-8db9d5cd2914",
+      "name": "Webhook",
+      "webhookId": "b07a203d-a871-4d77-a40c-337c8ac3a961"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "a2d134fc-1e44-437f-b538-1a9a172be82f",
+  "nodeGroups": [],
+  "id": "MLGSlev9J4TyhZQN",
+  "tags": []
+}

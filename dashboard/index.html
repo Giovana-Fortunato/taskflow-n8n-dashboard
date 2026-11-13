@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | Organizador Acadêmico</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+
+                <span>Task<span class="brand-light">Flow</span></span>
+            </div>
+
+            <div class="menu-label">MENU PRINCIPAL</div>
+
+            <nav class="navigation">
+
+                <a href="#" class="nav-item active" id="dashboardButton" data-page="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Visão geral</span>
+                </a>
+
+                <a href="#tasks-section" class="nav-item" data-page="dashboard">
+                    <i data-lucide="clipboard-list"></i>
+                    <span>Minhas tarefas</span>
+                </a>
+
+                <a href="#tasks-section" class="nav-item" data-filter-status="Pendente">
+                    <i data-lucide="clock-3"></i>
+                    <span>Pendentes</span>
+                </a>
+
+                <a href="#tasks-section" class="nav-item" data-filter-status="Atrasada">
+                    <i data-lucide="alert-circle"></i>
+                    <span>Atrasadas</span>
+                </a>
+
+                <a href="#tasks-section" class="nav-item" data-filter-status="Concluída">
+                    <i data-lucide="check-circle"></i>
+                    <span>Concluídas</span>
+                </a>
+
+            </nav>
+
+            <!-- BOTÃO DE NOVA TAREFA -->
+            <button class="primary-button sidebar-add-button" id="add-task-sidebar-btn">
+                <i data-lucide="plus"></i>
+                Nova tarefa
+            </button>
+
+            <!-- ESTA DIV EMPURRA O PERFIL PARA O FINAL DA TELA -->
+            <div class="sidebar-bottom">
+                <a href="#profile-section" class="profile" id="profileButton">
+                    <div class="avatar">TF</div>
+                    <div class="profile-info">
+                        <strong>Meu espaço</strong>
+                        <span>Minha conta</span>
+                    </div>
+                    <i data-lucide="chevron-right"></i>
+                </a>
+            </div>
+
+        </aside>
+
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <!-- PÁGINA: VISÃO GERAL -->
+            <div id="dashboard-page">
+
+                <header class="topbar">
+
+                    <div>
+                        <span class="breadcrumb">Workspace / <strong>Visão geral</strong></span>
+                        <h1>Visão geral</h1>
+                        <p>Acompanhe suas atividades e organize sua rotina.</p>
+                    </div>
+
+                    <button class="primary-button" id="add-task-btn">
+                        <i data-lucide="plus"></i>
+                        Nova tarefa
+                    </button>
+
+                </header>
+
+
+                <!-- SAUDAÇÃO -->
+                <section class="welcome-banner">
+                    <div>
+                        <h2>Olá! O que temos para hoje?</h2>
+                        <p>Acompanhe suas disciplinas e prazos acadêmicos.</p>
+                    </div>
+                    <div class="banner-decoration">
+                        <i data-lucide="book-open-check"></i>
+                    </div>
+                </section>
+
+                <!-- INDICADORES -->
+                <section class="stats-grid">
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Total de tarefas</span>
+
+                            <div class="stat-icon purple">
+                                <i data-lucide="layers"></i>
+                            </div>
+                        </div>
+
+                        <strong id="total-tasks">0</strong>
+                        <small>Tarefas cadastradas</small>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Pendentes</span>
+
+                            <div class="stat-icon orange">
+                                <i data-lucide="clock"></i>
+                            </div>
+                        </div>
+
+                        <strong id="pending-tasks">0</strong>
+                        <small>Aguardando realização</small>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Em andamento</span>
+
+                            <div class="stat-icon blue">
+                                <i data-lucide="loader-circle"></i>
+                            </div>
+                        </div>
+
+                        <strong id="progress-tasks">0</strong>
+                        <small>Atividades em execução</small>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Concluídas</span>
+
+                            <div class="stat-icon green">
+                                <i data-lucide="check-circle-2"></i>
+                            </div>
+                        </div>
+
+                        <strong id="completed-tasks">0</strong>
+                        <small>Atividades finalizadas</small>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Atrasadas</span>
+
+                            <div class="stat-icon red">
+                                <i data-lucide="alert-circle"></i>
+                            </div>
+                        </div>
+
+                        <strong id="overdue-tasks">0</strong>
+                        <small>Precisam de atenção</small>
+                    </article>
+
+                </section>
+
+
+                <!-- PROGRESSO -->
+                <section class="progress-section">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <h3>Seu progresso</h3>
+                            <p>Acompanhe o andamento das suas atividades.</p>
+                        </div>
+
+                        <strong id="progress-percentage">0%</strong>
+
+                    </div>
+
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+
+                    <span class="progress-caption" id="progress-caption">
+                        Nenhuma tarefa concluída ainda.
+                    </span>
+
+                </section>
+
+
+                <!-- LISTA DE TAREFAS -->
+                <section class="tasks-section" id="tasks-section">
+
+                    <div class="section-heading tasks-heading">
+
+                        <div>
+                            <h3>Minhas tarefas</h3>
+                            <p>Gerencie e acompanhe suas atividades acadêmicas.</p>
+                        </div>
+
+                        <span class="task-count" id="task-count">0 tarefas</span>
+
+                    </div>
+
+
+                    <!-- PESQUISA E FILTROS -->
+                    <div class="filters">
+
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input type="text" id="search-input" placeholder="Buscar tarefa...">
+                        </div>
+
+                        <select id="filter-discipline">
+                            <option value="">Todas as disciplinas</option>
+                        </select>
+
+                        <select id="filter-priority">
+                            <option value="">Todas as prioridades</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Média">Média</option>
+                            <option value="Baixa">Baixa</option>
+                        </select>
+
+                        <select id="filter-status">
+                            <option value="">Todos os status</option>
+                            <option value="Pendente">Pendente</option>
+                            <option value="Em andamento">Em andamento</option>
+                            <option value="Concluída">Concluída</option>
+                            <option value="Atrasada">Atrasada</option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- CARDS DAS TAREFAS -->
+                    <div class="tasks-list" id="tasks-list"></div>
+
+                </section>
+
+
+                <footer>
+                    <span>TaskFlow © 2026</span>
+                    <span>Workspace Acadêmico</span>
+                </footer>
+
+            </div>
+
+
+            <!-- PÁGINA: MEU ESPAÇO -->
+            <div class="profile-page" id="profile-page" style="display: none;">
+
+                <div class="profile-page-header">
+
+                    <span class="breadcrumb">Workspace / <strong>Meu espaço</strong></span>
+
+                    <h1>Meu espaço</h1>
+
+                    <p>Gerencie suas informações e preferências.</p>
+
+                </div>
+
+
+                <!-- CARTÃO DA CONTA -->
+                <section class="account-card">
+
+                    <div class="account-avatar">TF</div>
+
+                    <div class="account-info">
+
+                        <span class="welcome-tag">MINHA CONTA</span>
+
+                        <h2>Estudante TaskFlow</h2>
+
+                        <p>estudante@email.com</p>
+
+                    </div>
+
+                    <span class="account-status">Perfil demonstrativo</span>
+
+                </section>
+
+
+                <!-- INFORMAÇÕES PESSOAIS -->
+                <section class="profile-section">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <h3>Informações pessoais</h3>
+                            <p>Seus dados de identificação.</p>
+                        </div>
+
+                        <i data-lucide="user-round"></i>
+
+                    </div>
+
+
+                    <div class="profile-fields">
+
+                        <div class="profile-field">
+                            <label>Nome</label>
+                            <div>Estudante TaskFlow</div>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>E-mail</label>
+                            <div>estudante@email.com</div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PREFERÊNCIAS -->
+                <section class="profile-section">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <h3>Preferências</h3>
+                            <p>Personalize sua experiência no TaskFlow.</p>
+                        </div>
+
+                        <i data-lucide="settings-2"></i>
+
+                    </div>
+
+
+                    <div class="preference-item">
+
+                        <div class="preference-icon">
+                            <i data-lucide="bell"></i>
+                        </div>
+
+                        <div class="preference-info">
+                            <strong>Lembretes por e-mail</strong>
+                            <span>Receba avisos sobre tarefas próximas do prazo.</span>
+                        </div>
+
+                        <span class="preference-tag">Configurado no n8n</span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SEGURANÇA -->
+                <section class="profile-section account-actions">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <h3>Segurança e acesso</h3>
+                            <p>Opções de acesso à sua conta.</p>
+                        </div>
+
+                        <i data-lucide="shield-check"></i>
+
+                    </div>
+
+
+                    <div class="preference-item">
+
+                        <div class="preference-icon">
+                            <i data-lucide="lock"></i>
+                        </div>
+
+                        <div class="preference-info">
+                            <strong>Alterar senha</strong>
+                            <span>Disponível quando configurarmos o cadastro.</span>
+                        </div>
+
+                        <span class="preference-tag">Em breve</span>
+
+                    </div>
+
+                </section>
+
+
+                <footer>
+                    <span>TaskFlow © 2026</span>
+                    <span>Workspace Acadêmico</span>
+                </footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- MODAL DE CADASTRO E EDIÇÃO -->
+    <div class="modal-overlay" id="task-modal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="modal-title">Nova tarefa</h2>
+                    <p>Preencha as informações da atividade.</p>
+                </div>
+
+                <button class="close-button" id="close-modal">
+                    <i data-lucide="x"></i>
+                </button>
+
+            </div>
+
+
+            <form id="task-form">
+
+                <input type="hidden" id="task-id">
+
+
+                <div class="form-group">
+                    <label for="task-name">Nome da tarefa *</label>
+                    <input type="text" id="task-name" required placeholder="Ex.: Lista de exercícios">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="task-discipline">Disciplina *</label>
+                    <input type="text" id="task-discipline" required placeholder="Ex.: Banco de Dados II">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="task-description">Descrição</label>
+                    <textarea id="task-description" rows="3" placeholder="Descreva os detalhes da tarefa..."></textarea>
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="task-date">Data de entrega *</label>
+                        <input type="date" id="task-date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-priority">Prioridade</label>
+
+                        <select id="task-priority">
+                            <option value="Baixa">Baixa</option>
+                            <option value="Média" selected>Média</option>
+                            <option value="Alta">Alta</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="task-status">Status</label>
+
+                    <select id="task-status">
+                        <option value="Pendente">Pendente</option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option value="Concluída">Concluída</option>
+                    </select>
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button type="button" class="secondary-button" id="cancel-modal">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="primary-button">
+                        Salvar tarefa
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL DE EXCLUSÃO -->
+    <div class="modal-overlay" id="deleteModal">
+
+        <div class="modal delete-modal">
+
+            <div class="delete-icon">
+                <i data-lucide="trash-2"></i>
+            </div>
+
+            <h2>Excluir tarefa?</h2>
+
+            <p>
+                Tem certeza de que deseja excluir
+                <strong id="deleteTaskName"></strong>?
+                Essa ação não poderá ser desfeita.
+            </p>
+
+            <div class="modal-actions">
+
+                <button type="button" class="btn-cancel" id="cancelDelete">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn-delete" id="confirmDelete">
+                    Excluir tarefa
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+    <div id="toast" class="toast">
+        <div class="toast-icon">
+            <i data-lucide="check-circle"></i>
+        </div>
+
+        <div class="toast-content">
+            <strong id="toast-title">Sucesso!</strong>
+            <span id="toast-message">Operação realizada.</span>
+        </div>
+
+        <button class="toast-close" onclick="hideToast()">
+            <i data-lucide="x"></i>
+        </button>
+    </div>
+
+
+
+</body>
+
+</html>
