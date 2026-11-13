@@ -45,6 +45,7 @@ flowchart LR
     B -->|"API do Google Sheets"| C[("Planilha<br/>Google Sheets")]
     D["Agendador<br/>todos os dias, 8h"] --> B
     B -->|"API do Gmail"| E["E-mail de lembrete"]
+```
 
 ## Tecnologias
 
@@ -56,7 +57,7 @@ flowchart LR
 
 ## Estrutura do repositório
 
-```
+
 taskflow/
 ├── dashboard/
 │   ├── index.html
