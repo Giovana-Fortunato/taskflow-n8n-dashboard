@@ -55,7 +55,7 @@ flowchart LR
 - **Dados:** Google Sheets
 - **APIs e autenticação:** Google Cloud (Google Sheets API, Gmail API e OAuth 2.0)
 
-## Estrutura do repositório
+## Estrutura do Repositório
 
 ```text
 taskflow/
