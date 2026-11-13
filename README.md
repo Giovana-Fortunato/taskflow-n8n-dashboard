@@ -41,11 +41,10 @@ O dashboard é uma página estática (HTML, CSS e JavaScript puro) que conversa 
 
 ```mermaid
 flowchart LR
-    A["Dashboard<br/>HTML, CSS e JS"] -->|"GET, POST, PUT, DELETE"| B["n8n<br/>Docker, localhost:5678"]
-    B -->|"Google Sheets API"| C[("Planilha<br/>Google Sheets")]
-    D["Schedule Trigger<br/>todos os dias, 8h"] --> B
-    B -->|"Gmail API"| E["E-mail de lembrete"]
-```
+    A["Painel de controle<br/>HTML, CSS e JS"] -->|"GET, POST, PUT, DELETE"| B["n8n<br/>Docker, localhost:5678"]
+    B -->|"API do Google Sheets"| C[("Planilha<br/>Google Sheets")]
+    D["Agendador<br/>todos os dias, 8h"] --> B
+    B -->|"API do Gmail"| E["E-mail de lembrete"]
 
 ## Tecnologias
 
